@@ -80,6 +80,21 @@ cd freeradius-auth
 
 No necesitas hacer nada manualmente: los scripts se ejecutan automáticamente al iniciar el contenedor.
 
+**Si necesitas ejecutar el script `setup_schema.sh` manualmente para inicializar o restaurar el esquema de la base de datos, puedes hacerlo accediendo al contenedor MariaDB y ejecutando el script de la siguiente manera:**
+
+```bash
+# Accede al contenedor MariaDB
+docker exec -it freeradius-mariadb bash
+
+# Ve al directorio donde está el script
+cd /docker-entrypoint-initdb.d
+
+# Ejecuta el script
+bash setup_schema.sh
+```
+
+Esto ejecutará el script `setup_schema.sh` ubicado en `/docker-entrypoint-initdb.d` dentro del contenedor `freeradius-mariadb`. Asegúrate de que el contenedor esté en ejecución antes de ejecutar estos comandos.
+
 ### 3. Configuración de FreeRADIUS
 - FreeRADIUS se conecta a MariaDB para validar usuarios.
 - El archivo `clients.conf` define qué clientes pueden conectarse (en este caso, el servidor Apache).
